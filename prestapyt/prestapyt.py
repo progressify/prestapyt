@@ -19,6 +19,7 @@ from which I also inspired my library.
 
 Questions, comments? guewen.baconnier@gmail.com
 """
+import re
 
 from future.standard_library import install_aliases
 install_aliases()
@@ -270,6 +271,7 @@ class PrestaShopWebService(object):
             raise PrestaShopWebServiceError('HTTP response is empty')
 
         try:
+            content = re.sub(r'\t', '', content)
             parsed_content = ElementTree.fromstring(content)
         except ExpatError as err:
             raise PrestaShopWebServiceError(
